@@ -26,7 +26,7 @@ namespace OrderService.Tests
         public async Task Should_Return_Available_Delivery_Dates(List<OrderRequest> orders)
         {
             _mockOrderService.Setup(x => x.AvalilableDeliveryDates(orders)).Verifiable();
-            var result = await _sut.CreateOrder(orders);
+            var result = await _sut.AvailableDeliveryDates(orders);
 
             Assert.Equal(StatusCodes.Status200OK, (result as IStatusCodeActionResult)?.StatusCode);
         }
@@ -38,7 +38,7 @@ namespace OrderService.Tests
                 .ThrowsAsync(new IncorrectOrderException("One or More Products Can Not Be Found"))
                                    .Verifiable();
 
-            var result = await _sut.CreateOrder(orders);
+            var result = await _sut.AvailableDeliveryDates(orders);
 
             Assert.Equal(StatusCodes.Status400BadRequest, (result as IStatusCodeActionResult)?.StatusCode);
         }      
